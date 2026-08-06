@@ -1,62 +1,122 @@
 [
   {
     "id": 1,
-    "pergunta": "Segundo o discurso, o que significa 'adornar o ensino divino' com base em Tito 2:10?",
+    "pergunta": "Segundo o artigo, a fofoca é sempre algo ruim?",
     "opcoes": [
-      "Usar roupas luxuosas durante os discursos",
-      "Tornar a verdade bíblica atraente através do nosso modo de viver",
-      "Decorar o Salão do Reino com flores e ornamentos",
-      "Memorizar todos os textos bíblicos da reunião"
+      "Sim, qualquer conversa sobre outras pessoas é errada.",
+      "Não, conversas informais que mostram interesse sincero pelos outros podem ser apropriadas.",
+      "Sim, pois a Bíblia proíbe falar sobre terceiros em qualquer situação.",
+      "Não, desde que a conversa seja feita por e-mail ou mensagens instantâneas."
     ],
     "resposta_correta": 1,
-    "explicacao": "Conforme Tito 2:10, adornar o ensino divino significa refletir os princípios bíblicos no nosso comportamento diário, tornando a mensagem atraente para outros."
+    "explicacao": "O texto explica que conversas informais podem fornecer informações úteis e demonstrar que nos importamos com os outros [cite: 292, 295, 296], desde que não se tornem intromissão ou boatos[cite: 294, 297]."
   },
   {
     "id": 2,
-    "pergunta": "De acordo com 1 Pedro 3:3, 4, qual é o tipo de adorno que Jeová mais valoriza?",
+    "pergunta": "De acordo com Filipenses 2:4 e 1 Pedro 4:15, qual é o equilíbrio entre se interessar pelos outros e fofocar?",
     "opcoes": [
-      "A aparência física impecável e elegante",
-      "O conhecimento acadêmico e teológico",
-      "As qualidades internas e o espírito calmo e brande",
-      "A quantidade de horas dedicadas à pregação"
+      "Devemos nos interessar pela vida dos outros sem nos intrometermos em assuntos que não nos dizem respeito.",
+      "Devemos vigiar a vida de todos para garantir que ninguém cometa erros.",
+      "Não devemos conversar com ninguém sobre assuntos pessoais em hipótese alguma.",
+      "Devemos repassar suspeitas para alertar os amigos sobre possíveis problemas."
     ],
-    "resposta_correta": 2,
-    "explicacao": "1 Pedro 3:3, 4 destaca que o adorno imperecível das qualidades internas é de grande valor aos olhos de Deus, enquanto o exterior desvanece."
+    "resposta_correta": 0,
+    "explicacao": "A Bíblia incentiva o interesse sincero ao mesmo tempo em que alerta contra a intromissão em assuntos alheios[cite: 293, 294, 295]."
   },
   {
     "id": 3,
-    "pergunta": "Qual destas NÃO foi mencionada no discurso como uma forma prática de adornar o ensino divino no dia a dia?",
+    "pergunta": "O que o texto compara com a habilidade de dirigir numa estrada movimentada?",
     "opcoes": [
-      "Aperfeiçoar a arte de ensino e valorizar o ministério",
-      "Manter o Salão do Reino limpo e acolhedor",
-      "Ter boas maneiras, pontualidade e simpatia na escola ou trabalho",
-      "Evitar qualquer contacto com pessoas que não pertencem à congregação"
+      "A capacidade de inventar histórias sem ser pego.",
+      "A habilidade de mudar de assunto com jeito quando a conversa começa a virar fofoca.",
+      "O ato de ignorar completamente o que as pessoas dizem.",
+      "A pressa em espalhar uma novidade na internet."
     ],
-    "resposta_correta": 3,
-    "explicacao": "O discurso incentiva o trato respeitoso, humilde e simpático com todos, inclusive com quem não é Testemunha de Jeová, e não o isolamento."
+    "resposta_correta": 1,
+    "explicacao": "Assim como o motorista muda de faixa ao notar um obstáculo [cite: 304, 305, 306], você pode 'mudar de faixa' e redirecionar a conversa quando ela começa a rumar para a fofoca[cite: 307, 308]."
   },
   {
     "id": 4,
-    "pergunta": "Qual é o objetivo principal de manter uma conduta exemplar segundo 1 Pedro 2:12?",
+    "pergunta": "Segundo Provérbios 12:18, as palavras ditas irrefletidamente são comparadas a quê?",
     "opcoes": [
-      "Fazer com que as pessoas glorifiquem a Jeová ao observarem as nossas boas obras",
-      "Ganhar destaque e admiração dentro da congregação",
-      "Provar que somos superiores em termos morais aos outros",
-      "Evitar qualquer tipo de crítica ou oposição no trabalho"
+      "Estocadas duma espada.",
+      "Um escudo protetor.",
+      "Chuva em dia quente.",
+      "Um remédio suave."
     ],
     "resposta_correta": 0,
-    "explicacao": "1 Pedro 2:12 mostra que a nossa boa conduta faz com que as pessoas observem o nosso comportamento e acabem dando glória a Deus."
+    "explicacao": "O texto cita Provérbios 12:18 para lembrar que falar sem pensar pode ferir profundamente, como estocadas de uma espada[cite: 311, 312]."
   },
   {
     "id": 5,
-    "pergunta": "Que analogia foi utilizada no discurso para ilustrar o tempo e o esforço necessários para desenvolver qualidades cristãs?",
+    "pergunta": "Com base em 1 Tessalonicenses 4:11, o que devemos tomar por alvo ao ouvir algo que pode se tornar uma fofoca?",
     "opcoes": [
-      "A construção de uma ponte sobre o rio",
-      "A lapidação e o polimento de uma pedra preciosa (como uma esmeralda)",
-      "A pintura de um quadro a óleo detalhado",
-      "O cultivo de uma árvore frutífera no deserto"
+      "Investigar o assunto a fundo antes de contar aos outros.",
+      "Tomar por alvo viver sossegadamente e cuidar de nossos próprios negócios.",
+      "Contar apenas para os amigos de maior confiança.",
+      "Publicar em um blog pessoal para desmentir o boato."
     ],
     "resposta_correta": 1,
-    "explicacao": "A lapidação de pedras preciosas/esmeraldas foi usada para ilustrar que o progresso espiritual exige trabalho paciente, mas resulta em algo muito bonito para Jeová."
+    "explicacao": "O conselho do apóstolo Paulo é focar em viver de modo sossegado e cuidar dos próprios negócios para não se envolver em fofocas[cite: 315, 316]."
+  },
+  {
+    "id": 6,
+    "pergunta": "Quais perguntas o artigo sugere fazer a si mesmo antes de falar sobre alguém?",
+    "opcoes": [
+      "‘A pessoa vai descobrir?’, ‘Quem me contou isso?’ e ‘Isso vai me dar seguidores?’",
+      "‘Estou mesmo a par dos fatos?’, ‘Por que quero passar essa informação?’ e ‘Como isso vai afetar minha reputação?’",
+      "‘A história é engraçada?’, ‘Posso contar em segredo?’ e ‘Alguém já publicou isso?’",
+      "‘A pessoa é minha amiga?’, ‘Posso mudar os fatos?’ e ‘O assunto é polêmico?’"
+    ],
+    "resposta_correta": 1,
+    "explicacao": "Fazer essas três perguntas ajuda a refletir se a informação é verdadeira, qual a intenção ao compartilhá-la e o impacto no próprio caráter[cite: 318, 319]."
+  },
+  {
+    "id": 7,
+    "pergunta": "O que ser conhecido como fofoqueiro demonstra, de acordo com a matéria?",
+    "opcoes": [
+      "Diz mais a respeito do seu próprio caráter do que da pessoa de quem você fala.",
+      "Demonstra que você é alguém muito bem informado e popular.",
+      "Mostra que você se preocupa ativamente com a vida de todos.",
+      "Prova que você é uma pessoa transparente e sem segredos."
+    ],
+    "resposta_correta": 0,
+    "explicacao": "O artigo destaca que ser rotulado como fofoqueiro revela falhas no próprio caráter e não no da vítima do boato[cite: 319]."
+  },
+  {
+    "id": 8,
+    "pergunta": "O que Eclesiastes 7:9 aconselha a fazer se você for a vítima de uma fofoca?",
+    "opcoes": [
+      "Confrontar a pessoa imediatamente com raiva.",
+      "Não se precipitar no seu espírito em ficar ofendido.",
+      "Espalhar um boato sobre a outra pessoa em resposta.",
+      "Cortar a amizade com todos ao seu redor."
+    ],
+    "resposta_correta": 1,
+    "explicacao": "Eclesiastes 7:9 aconselha a ter maturidade, manter a calma e não reagir de maneira exagerada[cite: 321, 324, 328]."
+  },
+  {
+    "id": 9,
+    "pergunta": "Segundo o quadro 'VOCÊ SABIA. . . ?', por que apenas escutar uma fofoca já é um problema?",
+    "opcoes": [
+      "Porque você pode ser obrigado a prestar depoimento.",
+      "Porque só de ouvir você já pode ser considerado parcialmente responsável por ela.",
+      "Porque o ouvinte sempre acaba sendo responsabilizado sozinho.",
+      "Porque ouvir fofocas gasta muito tempo útil."
+    ],
+    "resposta_correta": 1,
+    "explicacao": "Ao permitir que a pessoa continue falando, você contribui para que a fofoca se espalhe ainda mais[cite: 334, 335]."
+  },
+  {
+    "id": 10,
+    "pergunta": "Qual é o Texto-Chave destacado no capítulo (Provérbios 13:3)?",
+    "opcoes": [
+      "“O amor cobre uma multidão de pecados.”",
+      "“Quem resguarda a sua boca guarda a sua alma. Quem abre bem os seus lábios — terá a ruína.”",
+      "“Existe aquele que fala irrefletidamente como que com as estocadas duma espada.”",
+      "“Não te precipites no teu espírito em ficar ofendido.”"
+    ],
+    "resposta_correta": 1,
+    "explicacao": "Provérbios 13:3 reforça a importância do autodomínio e de vigiar o que se diz para proteger a si mesmo[cite: 332, 333]."
   }
 ]
