@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "pergunta": "Segundo o discurso, o que significa 'adornar o ensino divino' com base em Tito 2:10?",
+    "opcoes": [
+      "Usar roupas luxuosas durante os discursos",
+      "Tornar a verdade bíblica atraente através do nosso modo de viver",
+      "Decorar o Salão do Reino com flores e ornamentos",
+      "Memorizar todos os textos bíblicos da reunião"
+    ],
+    "resposta_correta": 1,
+    "explicacao": "Conforme Tito 2:10, adornar o ensino divino significa refletir os princípios bíblicos no nosso comportamento diário, tornando a mensagem atraente para outros."
+  },
+  {
+    "id": 2,
+    "pergunta": "De acordo com 1 Pedro 3:3, 4, qual é o tipo de adorno que Jeová mais valoriza?",
+    "opcoes": [
+      "A aparência física impecável e elegante",
+      "O conhecimento acadêmico e teológico",
+      "As qualidades internas e o espírito calmo e brande",
+      "A quantidade de horas dedicadas à pregação"
+    ],
+    "resposta_correta": 2,
+    "explicacao": "1 Pedro 3:3, 4 destaca que o adorno imperecível das qualidades internas é de grande valor aos olhos de Deus, enquanto o exterior desvanece."
+  },
+  {
+    "id": 3,
+    "pergunta": "Qual destas NÃO foi mencionada no discurso como uma forma prática de adornar o ensino divino no dia a dia?",
+    "opcoes": [
+      "Aperfeiçoar a arte de ensino e valorizar o ministério",
+      "Manter o Salão do Reino limpo e acolhedor",
+      "Ter boas maneiras, pontualidade e simpatia na escola ou trabalho",
+      "Evitar qualquer contacto com pessoas que não pertencem à congregação"
+    ],
+    "resposta_correta": 3,
+    "explicacao": "O discurso incentiva o trato respeitoso, humilde e simpático com todos, inclusive com quem não é Testemunha de Jeová, e não o isolamento."
+  },
+  {
+    "id": 4,
+    "pergunta": "Qual é o objetivo principal de manter uma conduta exemplar segundo 1 Pedro 2:12?",
+    "opcoes": [
+      "Fazer com que as pessoas glorifiquem a Jeová ao observarem as nossas boas obras",
+      "Ganhar destaque e admiração dentro da congregação",
+      "Provar que somos superiores em termos morais aos outros",
+      "Evitar qualquer tipo de crítica ou oposição no trabalho"
+    ],
+    "resposta_correta": 0,
+    "explicacao": "1 Pedro 2:12 mostra que a nossa boa conduta faz com que as pessoas observem o nosso comportamento e acabem dando glória a Deus."
+  },
+  {
+    "id": 5,
+    "pergunta": "Que analogia foi utilizada no discurso para ilustrar o tempo e o esforço necessários para desenvolver qualidades cristãs?",
+    "opcoes": [
+      "A construção de uma ponte sobre o rio",
+      "A lapidação e o polimento de uma pedra preciosa (como uma esmeralda)",
+      "A pintura de um quadro a óleo detalhado",
+      "O cultivo de uma árvore frutífera no deserto"
+    ],
+    "resposta_correta": 1,
+    "explicacao": "A lapidação de pedras preciosas/esmeraldas foi usada para ilustrar que o progresso espiritual exige trabalho paciente, mas resulta em algo muito bonito para Jeová."
+  }
+]
