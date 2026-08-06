@@ -1,0 +1,24 @@
+// Rename it for perguntas.json
+[  
+  {
+    "id": 1,
+    "pergunta": "Qual era o nome do primeiro cachorro que a família teve?",
+    "opcoes": ["Rex", "Bidu", "Bob", "Pipoca"],
+    "resposta_correta": 1,
+    "explicacao": "O Bidu viveu conosco por mais de 10 anos!"
+  },
+  {
+    "id": 2,
+    "pergunta": "Quem é a pessoa mais provável de esquecer a chave de casa?",
+    "opcoes": ["João", "Maria", "Carlos", "Ana"],
+    "resposta_correta": 0,
+    "explicacao": "O João já ficou trancado do lado de fora três vezes este ano!"
+  },
+  {
+    "id": 3,
+    "pergunta": "Em que ano a família fez a primeira viagem para a praia juntos?",
+    "opcoes": ["2010", "2012", "2015", "2018"],
+    "resposta_correta": 2,
+    "explicacao": "Foi em janeiro de 2015 naquelas férias inesquecíveis."
+  }
+]

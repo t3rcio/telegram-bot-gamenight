@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  family-quiz-bot:
+    build: .
+    container_name: quiz_familia_bot    
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
+      - BOT_TOKEN=${BOT_TOKEN}
+    volumes:
+      - ./perguntas.json:/app/perguntas.json
+      
