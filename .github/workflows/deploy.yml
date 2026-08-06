@@ -1,0 +1,33 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT }}
+          script: |
+            cd ${{ secrets.VPS_DEPLOY_PATH }}
+            
+            # 1. Atualiza o repositório no servidor
+            git pull origin main
+            
+            # 2. Faz o build da imagem Docker (usando a cache do UV) e sobe o container
+            docker compose up -d --build
+            
+            # 3. Limpa imagens/camadas antigas não utilizadas
+            docker image prune -f
