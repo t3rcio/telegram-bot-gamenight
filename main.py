@@ -264,9 +264,8 @@ async def encerrar_jogo(context: ContextTypes.DEFAULT_TYPE, chat_id: int):
 
 
 def main():
-    TOKEN = "SEU_TELEGRAM_BOT_TOKEN"
-
-    app = Application.builder().token(TOKEN).build()
+    
+    app = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
 
     # Handlers de Comandos Admin
     app.add_handler(CommandHandler("tempo", cmd_tempo))
