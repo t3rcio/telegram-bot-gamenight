@@ -2,8 +2,9 @@ import asyncio
 import json
 import logging
 import os
+import sys
 
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update, WebAppInfo
 from telegram.ext import (
     Application,
     CallbackQueryHandler,
@@ -22,8 +23,10 @@ GAME_STATE = {
     "respostas_rodada": {},  # {user_id: opcao_index}
     "pergunta_atual_idx": 0,
     "perguntas": [],
+    "timer_task": None
 }
 
+CRONOMETRO_URL = 'https://t3rcio.github.io/telegram-bot-gamenight-frontend/cronometro.html'
 TELEGRAM_BOT_TOKEN = os.environ.get("BOT_TOKEN","")
 if not TELEGRAM_BOT_TOKEN:
     print("Gere o token do Bot no @BotFather e exporte no .env com o nome BOT_TOKEN")
@@ -119,7 +122,7 @@ async def cmd_pause(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("⏸️ **O jogo foi PAUSADO pelo Admin!**\nUse `/continuar` para retomar.")
 
 
-async def cmd_continuar(update: Update, context: ContextTypes.DEFAULT_TYPE):    
+async def cmd_continuar(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_admin(update.effective_user.id):
         await update.message.reply_text("⛔ Apenas o Admin pode retomar o jogo.")
         return
@@ -146,13 +149,93 @@ async def btn_join(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.answer("Você entrou no jogo!")
         await query.message.reply_text(f"👤 **{user.first_name}** entrou na partida!")
     else:
-        await query.answer("Você já está cadastrado!", show_alert=True)
+        await query.answer("Você já está participando!", show_alert=True)
+
+def gerar_texto_pergunta(q_data, idx: int, total: int, tempo_restante: int, tempo_total: int = GAME_STATE['tempo_por_pergunta']) -> str:
+    """Gera o texto formatado com o tempo e a barra de progresso em emojis."""
+    proporcao = max(0.0, tempo_restante / tempo_total)
+    
+    # Representa o tempo em 10 blocos visuais
+    blocos_preenchidos = int(proporcao * 10)
+    blocos_vazios = 10 - blocos_preenchidos
+
+    # Define a cor da barra com base no tempo restante
+    if proporcao > 0.5:
+        cor = "🟩"  # Verde
+    elif proporcao > 0.2:
+        cor = "🟨"  # Amarelo
+    else:
+        cor = "🟥"  # Vermelho
+
+    barra_progresso = (cor * blocos_preenchidos) + ("⬛" * blocos_vazios)
+
+    return (
+        f"❓ **Pergunta {idx + 1}/{total}**\n\n"
+        f"**{q_data['pergunta']}**\n\n"
+        f"⏳ Tempo: **{tempo_restante}s**\n"
+        f"`[{barra_progresso}]`"
+    )
 
 
-async def proxima_pergunta(context: ContextTypes.DEFAULT_TYPE, chat_id: int):
+async def rodar_cronometro_e_animacao(
+    context: ContextTypes.DEFAULT_TYPE, 
+    chat_id: int, 
+    message_id: int, 
+    q_data: dict, 
+    idx: int, 
+    total: int, 
+    tempo_total: int = GAME_STATE['tempo_por_pergunta']
+):
+    
+    tempo_restante = tempo_total
+    ultimo_tempo_editado = tempo_total
+
+    try:
+        while tempo_restante > 0:
+            if not GAME_STATE.get("em_andamento"):
+                return
+
+            if not GAME_STATE.get("pausado"):
+                await asyncio.sleep(1)
+                tempo_restante -= 1
+
+                # Se todos os jogadores cadastrados já responderam, podemos encerrar o tempo antes
+                jogadores_cadastrados = len(GAME_STATE.get("jogadores", {}))
+                respostas_atuais = len(GAME_STATE.get("respostas_rodada", {}))
+                if jogadores_cadastrados > 0 and respostas_atuais >= jogadores_cadastrados:
+                    break
+
+                # Atualiza a mensagem visualmente
+                deve_atualizar = (ultimo_tempo_editado - tempo_restante >= 2) or (tempo_restante <= 5)
+                if deve_atualizar and tempo_restante >= 0:
+                    ultimo_tempo_editado = tempo_restante
+                    texto_atualizado = gerar_texto_pergunta(q_data, idx, total, tempo_restante, tempo_total)
+                    
+                    try:
+                        await context.bot.edit_message_text(
+                            chat_id=chat_id,
+                            message_id=message_id,
+                            text=texto_atualizado,
+                            reply_markup=InlineKeyboardMarkup([
+                                [InlineKeyboardButton(f"({['A','B','C','D'][i]}) {opc}", callback_data=f"RES_{i}")]
+                                for i, opc in enumerate(q_data["opcoes"])
+                            ]),
+                            parse_mode="Markdown",
+                        )
+                    except Exception:
+                        pass
+            else:
+                await asyncio.sleep(1)
+        await finalizar_rodada(context, chat_id)
+
+    except asyncio.CancelledError:
+        # A Task foi cancelada deliberadamente (ex: jogo pausado ou resetado)
+        pass
+
+async def proxima_pergunta(context: ContextTypes.DEFAULT_TYPE, chat_id: int, tempo_total:int = GAME_STATE['tempo_por_pergunta']):
     idx = GAME_STATE["pergunta_atual_idx"]
     perguntas = GAME_STATE["perguntas"]
-
+    
     if idx >= len(perguntas):
         await encerrar_jogo(context, chat_id)
         return
@@ -160,42 +243,34 @@ async def proxima_pergunta(context: ContextTypes.DEFAULT_TYPE, chat_id: int):
     GAME_STATE["respostas_rodada"] = {}
     q_data = perguntas[idx]
 
-    # Teclado em coluna única para legibilidade em telas de celulares
-    keyboard = []
+    keyboard = []    
     letras = ["A", "B", "C", "D"]
     for i, opc in enumerate(q_data["opcoes"]):
-        texto_botao = f"{letras[i]}) {opc}"
-        keyboard.append([InlineKeyboardButton(texto_botao, callback_data=f"ans_{i}")])
+        texto_botao = f"({letras[i]}) {opc}"
+        keyboard.append([InlineKeyboardButton(texto_botao, callback_data=f"RES_{i}")])
 
     reply_markup = InlineKeyboardMarkup(keyboard)
 
-    msg = (
-        f"❓ **Pergunta {idx + 1}/{len(perguntas)}**\n\n"
-        f"{q_data['pergunta']}\n\n"
-        f"⏳ Tempo: **{GAME_STATE['tempo_por_pergunta']}s**"
+    msg_texto = gerar_texto_pergunta(q_data, idx, len(perguntas), tempo_total, tempo_total)
+    msg_obj = await context.bot.send_message(
+        chat_id=chat_id,
+        text=msg_texto,
+        reply_markup=reply_markup,
+        parse_mode="Markdown"
     )
 
-    await context.bot.send_message(
-        chat_id=chat_id, text=msg, reply_markup=reply_markup, parse_mode="Markdown"
+    if GAME_STATE.get('timer_task') and not GAME_STATE['timer_task'].done():
+        GAME_STATE['timer_task'].cancel()
+
+    GAME_STATE['timer_task'] = asyncio.create_task(
+        rodar_cronometro_e_animacao(context, chat_id, msg_obj.message_id,q_data, idx, len(perguntas), GAME_STATE['tempo_por_pergunta'])
     )
-
-    # Temporizador resiliente à pausa (checa a cada 1s)
-    tempo_restante = GAME_STATE["tempo_por_pergunta"]
-    while tempo_restante > 0:
-        if not GAME_STATE["em_andamento"]:
-            return
-
-        if not GAME_STATE["pausado"]:
-            await asyncio.sleep(1)
-            tempo_restante -= 1
-        else:
-            await asyncio.sleep(1)    
-    await finalizar_rodada(context, chat_id)
 
 
 async def btn_resposta(update: Update, context: ContextTypes.DEFAULT_TYPE):    
     query = update.callback_query
     user = query.from_user
+    logging.info(f"CLICK NA RESPOSTA: {user}")
 
     if GAME_STATE["pausado"]:
         await query.answer("⏸️ O jogo está pausado no momento!", show_alert=True)
@@ -211,6 +286,7 @@ async def btn_resposta(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     opcao_escolhida = int(query.data.split("_")[1])
     GAME_STATE["respostas_rodada"][user.id] = opcao_escolhida
+    logging.info(f"RESPOSTA ENVIADA POR {user}: {opcao_escolhida}")
 
     await query.answer("Resposta registrada!")
     await query.message.reply_text(f"📩 **{user.first_name}** respondeu!")
@@ -221,8 +297,8 @@ async def finalizar_rodada(context: ContextTypes.DEFAULT_TYPE, chat_id: int):
     q_data = GAME_STATE["perguntas"][idx]
     correta = q_data["resposta_correta"]
 
-    texto_resultado = f"⏰ **Fim do tempo!**\n\n"
-    texto_resultado += f"✅ Resposta correta: **{q_data['opcoes'][correta]}**\n"
+    texto_resultado = f"⏰ **FIM DO TEMPO!**\n\n"
+    texto_resultado += f"✅ RESPOSTA CORRETA: **{q_data['opcoes'][correta]}**\n"
     texto_resultado += f"💡 __{q_data['explicacao']}__\n\n"
     texto_resultado += "📊 **Resultado da rodada:**\n"
 
@@ -276,7 +352,7 @@ def main():
 
     # Handlers de Botoes
     app.add_handler(CallbackQueryHandler(btn_join, pattern="^join_game$"))
-    app.add_handler(CallbackQueryHandler(btn_resposta, pattern="^ans_"))
+    app.add_handler(CallbackQueryHandler(btn_resposta, pattern="^RES_[0-9]+$"))
     
     app.run_polling()
 

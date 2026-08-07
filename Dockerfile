@@ -13,7 +13,7 @@ WORKDIR /app
 COPY --from=uv_bin /uv /bin/uv
 COPY pyproject.toml uv.lock* .env ./
 RUN set -o allexport; source .env; set +o allexport
-COPY .env .
+
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-install-project
 
